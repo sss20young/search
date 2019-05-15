@@ -1,0 +1,14 @@
+<form action="{% url 'post_list'%}" method="get">
+    <input type="text" name="q" value="{{ q }}">
+    <input type="submit" value="검색">
+</form>
+<h1><a href="{% url 'post' %}"><글 작성하러 가기></a></h4>
+{%for board in boards.all%}
+    <div class="container">
+        <a href={% url 'detail' board.id %}>
+            <h2>제목: {{board.title}}</h2>
+        </a>
+        <p>내용: {{board.body}}</p>
+        <small class="text-muted">{{board.pub_date}}</small>
+    </div>
+{%endfor%}
