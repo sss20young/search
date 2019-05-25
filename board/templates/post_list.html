@@ -4,9 +4,13 @@
         <input type="text" name="q" value="{{ q }}">
         <input type="submit" value="검색">
     </form>
-    {% for i in post_list %}
-    제목 : 
-    {{i}}
+
+    {% for i in result %}
+    <a href={% url 'detail' i.id %}>
+    제목 : {{i}}
+    </a>
+    본문 : {{i.body}}
     <br>
     {% endfor %}
+
 </div>

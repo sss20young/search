@@ -50,12 +50,15 @@ def delete(request, pk):
 # 검색
 def post_list(request):
     qs = Board.objects.all()
+    list=[]
 
     q = request.GET.get('q', '') # GET request의 인자중에 q 값이 있으면 가져오고, 없으면 빈 문자열 넣기
     if q: # q가 있으면
-        qs = qs.filter(title__icontains=q) # 제목에 q가 포함되어 있는 레코드만 필터링
+        qs1 = qs.filter(title__icontains=q) # 제목에 q가 포함되어 있는 레코드만 필터링
+        qs2 = qs.filter(body__icontains=q) # 본문에 q가 포함되어 있는 레코드만 필터링
+        result = qs1.union(qs2, all=False) # 제목과 본문에 같은 내용이 있으면 중복을 허락하지 않는다.
 
     return render(request, 'post_list.html', {
-        'post_list' : qs,
+        'result' : result,
         'q' : q,
     })
