@@ -1,5 +1,6 @@
 <div class="container">
     <a href="{% url 'show' %}">뒤로</a>
+    
     <form action="{% url 'post_list'%}" method="get">
         <input type="text" name="q" value="{{ q }}">
         <input type="submit" value="검색">
